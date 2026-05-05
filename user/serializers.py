@@ -32,3 +32,21 @@ class UserUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['email', 'first_name', 'last_name']
+
+
+class FormSummarySerializer(serializers.Serializer):
+    id               = serializers.IntegerField()
+    name             = serializers.CharField()
+    version          = serializers.IntegerField()
+    is_published     = serializers.BooleanField()
+    submission_count = serializers.IntegerField()
+    updated_at       = serializers.DateTimeField()
+
+
+class RecentSubmissionSerializer(serializers.Serializer):
+    id         = serializers.IntegerField()
+    form_id    = serializers.IntegerField(source='form.id')
+    form_name  = serializers.CharField(source='form.name')
+    version    = serializers.IntegerField()
+    data       = serializers.JSONField()
+    created_at = serializers.DateTimeField()
