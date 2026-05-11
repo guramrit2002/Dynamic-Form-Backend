@@ -89,7 +89,7 @@ def _validate_field(field, step_index, field_index, field_ids):
             for k, rule in enumerate(field['validations']):
                 errors.extend(_validate_validation_rule(rule, prefix, k))
 
-    if 'visibility' in field:
+    if 'visibility' in field and isinstance(field['visibility'], dict):
         errors.extend(_validate_condition(field['visibility'].get('condition'), f'{prefix}.visibility'))
 
     return errors

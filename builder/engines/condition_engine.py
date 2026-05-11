@@ -36,7 +36,7 @@ def get_visible_fields(schema, data):
     for step in schema.get('steps', []):
         for field in step.get('fields', []):
             visibility = field.get('visibility')
-            if visibility:
+            if visibility and isinstance(visibility, dict):
                 if evaluate_condition(visibility.get('condition'), data):
                     visible.add(field['id'])
             else:
